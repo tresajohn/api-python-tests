@@ -24,7 +24,7 @@ allure open allure-report
 
 GitHub Actions runs all tests on every push to `main` and publishes the interactive Allure report to GitHub Pages.
 
-[View live report](https://tresajohn.github.io/restful-booker-py/)
+[View live report](https://tresajohn.github.io/api-python-tests/)
 
 ## Coverage
 
