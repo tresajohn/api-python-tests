@@ -23,3 +23,26 @@ def token(auth_client):
 @pytest.fixture(scope="session")
 def booking_client(base_url):
     return BookingClient(base_url)
+
+
+@pytest.fixture
+def booking_payload():
+    return {
+        "firstname": "Test",
+        "lastname": "User",
+        "totalprice": 150,
+        "depositpaid": True,
+        "bookingdates": {"checkin": "2025-01-01", "checkout": "2025-01-07"},
+        "additionalneeds": "Breakfast",
+    }
+
+
+@pytest.fixture
+def created_booking(booking_client, booking_payload, token):
+    result = booking_client.create(booking_payload)
+    booking_id = result["bookingid"]
+    yield booking_id
+    try:
+        booking_client.delete(booking_id, token)
+    except Exception:
+        pass
